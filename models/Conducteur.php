@@ -94,7 +94,7 @@ class Conducteur extends Db {
         $datas = Db::dbFind(self::TABLE_NAME);
         $conducteurs = [];
         foreach($datas as $data) {
-            $conducteurs[] = new Abonne($data['prenom'], $data['nom'], $data['id_conducteur']);
+            $conducteurs[] = new Conducteur($data['prenom'], $data['nom'], $data['id_conducteur']);
         }
         return $conducteurs;
     }
@@ -127,7 +127,7 @@ class Conducteur extends Db {
         
         Db::dbDelete(self::TABLE_NAME, $data);
         // On supprime aussi tous les emprunts !
-        Db::dbDelete(Emprunt::TABLE_NAME, [
+        Db::dbDelete(Association::TABLE_NAME, [
             'id_conducteur' => $this->id()
         ]);
         return;

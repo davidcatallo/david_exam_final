@@ -170,7 +170,7 @@ class Vehicule extends Db {
         
         Db::dbDelete(self::TABLE_NAME, $data);
         // On supprime aussi tous les emprunts !
-        Db::dbDelete(Emprunt::TABLE_NAME, [
+        Db::dbDelete(Association::TABLE_NAME, [
             'id_vehicule' => $this->id()
         ]);
         return;
