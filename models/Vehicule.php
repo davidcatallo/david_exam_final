@@ -146,7 +146,7 @@ class Vehicule extends Db {
             "prenom"        => $this->prenom(),
             "nom"           => $this->nom(),
         ];
-        if ($this->id() > 0) return $this->update();
+        if ($this->id_vehicule() > 0) return $this->update();
         $nouvelId = Db::dbCreate(self::TABLE_NAME, $data);
         $this->setId($nouvelId);
         return $this;
@@ -154,9 +154,9 @@ class Vehicule extends Db {
     public function update() {
         if ($this->id_vehicule > 0) {
             $data = [
-                "prenom"                   => $this->prenom(),
+                "prenom"                    => $this->prenom(),
                 "nom"                       => $this->nom(),
-                "id_vehicule"             => $this->id_vehicule()
+                "id_vehicule"               => $this->id_vehicule()
             ];
             Db::dbUpdate(self::TABLE_NAME, $data, 'id_vehicule');
             return $this;
@@ -165,13 +165,13 @@ class Vehicule extends Db {
     }
     public function delete() {
         $data = [
-            'id' => $this->id(),
+            'id_vehicule' => $this->id_vehicule(),
         ];
         
         Db::dbDelete(self::TABLE_NAME, $data);
         // On supprime aussi tous les emprunts !
         Db::dbDelete(Association::TABLE_NAME, [
-            'id_vehicule' => $this->id()
+            'id_association' => $this->id_association()
         ]);
         return;
     }

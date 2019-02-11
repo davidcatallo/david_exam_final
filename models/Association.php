@@ -76,7 +76,7 @@ class Association extends Db {
     
     public static function findOne(int $id) {
         $data = Db::dbFind(self::TABLE_NAME, [
-            ['id' => $id]
+            ['id_association' => $id]
         ]);
         if(count($data) > 0) $data = $data[0];
         else return;
@@ -96,16 +96,16 @@ class Association extends Db {
             "id_vehicule"     => $this->id_vehicule(),
             "id_conducteur"    => $this->id_conducteur(),
         ];
-        if ($this->id() > 0) return $this->update();
+        if ($this->id_association() > 0) return $this->update();
         $nouvelId = Db::dbCreate(self::TABLE_NAME, $data);
         $this->setId($nouvelId);
         return $this;
     }
     public function update() {
-        if ($this->id > 0) {
+        if ($this->id_association > 0) {
             $data = [
-                "id_vehicule"     => $this->id_vehicule(),
-                "id_conducteur"    => $this->id_conducteur(),
+                "id_vehicule"           => $this->id_vehicule(),
+                "id_conducteur"         => $this->id_conducteur(),
                 "id_association"        => $this->id_association()
             ];
             Db::dbUpdate(self::TABLE_NAME, $data, 'id_association');

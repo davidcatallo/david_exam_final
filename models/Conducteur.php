@@ -103,7 +103,7 @@ class Conducteur extends Db {
             "prenom"        => $this->prenom(),
             "nom"           => $this->nom(),
         ];
-        if ($this->id() > 0) return $this->update();
+        if ($this->id_conducteur() > 0) return $this->update();
         $nouvelId = Db::dbCreate(self::TABLE_NAME, $data);
         $this->setId($nouvelId);
         return $this;
@@ -122,13 +122,13 @@ class Conducteur extends Db {
     }
     public function delete() {
         $data = [
-            'id' => $this->id(),
+            'id_conducteur' => $this->id_conducteur(),
         ];
         
         Db::dbDelete(self::TABLE_NAME, $data);
         // On supprime aussi tous les emprunts !
         Db::dbDelete(Association::TABLE_NAME, [
-            'id_conducteur' => $this->id()
+            'id_association' => $this->id_association()
         ]);
         return;
     }
