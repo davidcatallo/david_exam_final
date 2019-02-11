@@ -24,5 +24,6 @@ $routes->get('/associations/(\d+)/edit',     'AssociationsController@edit');
 $routes->get('/associations/(\d+)/delete',   'AssociationsController@delete');
 
 $routes->get('/',  'PagesController@home');
+$routes->get('/divers',  'PagesController@divers');
 
 $routes->run();
