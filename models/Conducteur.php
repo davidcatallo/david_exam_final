@@ -128,7 +128,7 @@ class Conducteur extends Db {
         Db::dbDelete(self::TABLE_NAME, $data);
         // On supprime aussi tous les emprunts !
         Db::dbDelete(Emprunt::TABLE_NAME, [
-            'id_abonne' => $this->id()
+            'id_conducteur' => $this->id()
         ]);
         return;
     }
