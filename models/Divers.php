@@ -6,7 +6,7 @@ class Divers extends Db {
     public static function nombreConducteur() {
         $req = 'SELECT COUNT(*)
                 FROM conducteur';
-        var_dump($req);
+        return Db::dbQuery($req);
     }
     // Afficher le nombre de vehicules.
     public static function nombreVehicule() {
@@ -37,7 +37,7 @@ class Divers extends Db {
                 WHERE id_vehicule IS NULL';
         return Db::dbQuery($req);
     }
-    // Afficher le nombre de vehicules.
+    // Afficher les véhicules pour un conducteur.
     public static function VehiculeUnConducteur() {
         $req = 'SELECT *
                 FROM conducteur

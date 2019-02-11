@@ -1,3 +1,30 @@
+[2019-02-11 16:59:47] SELECT *
+                FROM conducteur
+                RIGHT JOIN association_vehicule_conducteur ON conducteur.id = association_vehicule_conducteur.id_conducteur
+                RIGHT JOIN vehicule ON vehicule.id = association_vehicule_conducteur.id_vehicule
+[2019-02-11 16:59:47] SELECT *
+                FROM conducteur
+                LEFT JOIN association_vehicule_conducteur ON conducteur.id = association_vehicule_conducteur.id_conducteur
+                LEFT JOIN vehicule ON vehicule.id = association_vehicule_conducteur.id_vehicule
+[2019-02-11 16:59:47] SELECT *
+                FROM conducteur
+                INNER JOIN association_vehicule_conducteur on association_vehicule_conducteur.id_conducteur = conducteur.id
+                INNER JOIN association_vehicule_conducteur on association_vehicule_conducteur.id_vehicule = vehicule.id
+                where prenom = "Philippe" AND nom = "Pandre"
+[2019-02-11 16:59:47] SELECT *
+                FROM conducteur
+                LEFT JOIN association_vehicule_conducteur ON association_vehicule_conducteur.id_conducteur = conducteur.id
+                WHERE id_vehicule IS NULL
+[2019-02-11 16:59:47] SELECT *
+                FROM vehicule
+                LEFT JOIN association_vehicule_conducteur ON association_vehicule_conducteur.id_vehicule = vehicule.id
+                WHERE id_conducteur IS NULL
+[2019-02-11 16:59:47] SELECT COUNT(*)
+                FROM association_vehicule_conducteur
+[2019-02-11 16:59:47] SELECT COUNT(*)
+                FROM conducteur
+[2019-02-11 16:59:47] SELECT COUNT(*)
+                FROM conducteur
 [2019-02-11 16:56:47] SELECT *
                 FROM conducteur
                 RIGHT JOIN association_vehicule_conducteur ON conducteur.id = association_vehicule_conducteur.id_conducteur
