@@ -1,6 +1,6 @@
 <?php
 
-class Conducteur extends Db {
+class Vehicule extends Db {
 
     protected $id_vehicule;
     protected $marque;
@@ -8,7 +8,7 @@ class Conducteur extends Db {
     protected $couleur;
     protected $immatriculation;
 
-    const TABLE_NAME = 'Vehicule';
+    const TABLE_NAME = 'vehicule';
 
     public function __construct($marque, $modele, $couleur, $immatriculation, $id_vehicule = null) {
         $this->setMarque($marque);
