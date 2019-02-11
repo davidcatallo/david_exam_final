@@ -74,9 +74,9 @@ class Association extends Db {
     }
 
     
-    public static function findOne(int $id) {
+    public static function findOne(int $id_association) {
         $data = Db::dbFind(self::TABLE_NAME, [
-            ['id_association' => $id]
+            ['id_association' => $id_association]
         ]);
         if(count($data) > 0) $data = $data[0];
         else return;
@@ -98,7 +98,7 @@ class Association extends Db {
         ];
         if ($this->id_association() > 0) return $this->update();
         $nouvelId = Db::dbCreate(self::TABLE_NAME, $data);
-        $this->setId($nouvelId);
+        $this->setIdAssociation($nouvelId);
         return $this;
     }
     public function update() {

@@ -29,24 +29,11 @@
                     <i class="fas fa-trash-alt"></i>
                 </a>
             </td>
-        </tr>
-    <?php endforeach; ?>
+        </tr> 
+    <?php endforeach; ?>  
 </table>
 
-    <a href="<?= url('conducteurs') ?>">Retour</a>
 
-
-    <form action="<?= url('conducteurs/save') ?>" method="post">
-
-        <input type="hidden" name="id_conducteur"      value="<?= (isset($conducteur)) ? $conducteur->id_conducteur() : '' ?>">
-        <input type="text"   name="nom"     value="<?= (isset($conducteur)) ? $conducteur->prenom() : '' ?>" placeholder="Nom" class="form-control">
-        <input type="text"   name="prenom"  value="<?= (isset($conducteur)) ? $conducteur->nom() : '' ?>"    placeholder="Prenom"    class="form-control">
-
-        <button type="submit" class="btn btn-<?= (isset($conducteur)) ? 'warning' : 'success' ?>">
-            <?= (isset($conducteur)) ? 'ajouter' : 'Créer' ?> un conducteur
-        </button>
-    </form>
- 
 
 <?php $content = ob_get_clean(); ?>
 <?php view('template', compact('content')); ?>

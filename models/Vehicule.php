@@ -13,8 +13,8 @@ class Vehicule extends Db {
     public function __construct($marque, $modele, $couleur, $immatriculation, $id_vehicule = null) {
         $this->setMarque($marque);
         $this->setModele($modele);
-        $this->setCouleur($modele);
-        $this->setImmatriculation($modele);
+        $this->setCouleur($couleur);
+        $this->setImmatriculation($immatriculation);
         $this->setIdVehicule($id_vehicule);
     }
 
@@ -78,6 +78,9 @@ class Vehicule extends Db {
      */ 
     public function setMarque($marque)
     {
+        if (strlen($marque) == 0) {
+            throw new Exception('La marque ne doit pas être nul.');
+        }
         $this->marque = $marque;
 
         return $this;
@@ -90,6 +93,9 @@ class Vehicule extends Db {
      */ 
     public function setModele($modele)
     {
+        if (strlen($modele) == 0) {
+            throw new Exception('Le modele ne doit pas être nul.');
+        }
         $this->modele = $modele;
 
         return $this;
@@ -102,6 +108,10 @@ class Vehicule extends Db {
      */ 
     public function setCouleur($couleur)
     {
+        if (strlen($couleur) == 0) {
+            throw new Exception('La couleur ne doit pas être nul.');
+        }
+    
         $this->couleur = $couleur;
 
         return $this;
@@ -114,6 +124,9 @@ class Vehicule extends Db {
      */ 
     public function setImmatriculation($immatriculation)
     {
+        if (strlen($immatriculation) == 0) {
+            throw new Exception('L\'immatriculation ne doit pas être nul.');
+        }
         $this->immatriculation = $immatriculation;
 
         return $this;
@@ -135,27 +148,31 @@ class Vehicule extends Db {
     }
     public static function findAll() {
         $datas = Db::dbFind(self::TABLE_NAME);
-        $vehicule = [];
+        $vehicules = [];
         foreach($datas as $data) {
-            $vehicule[] = new Vehicule($data['marque'], $data['modele'], $data['couleur'], $data['immatriculation'], $data['id_vehicule']);
+            $vehicules[] = new Vehicule($data['marque'], $data['modele'], $data['couleur'], $data['immatriculation'], $data['id_vehicule']);
         }
-        return $vehicule;
+        return $vehicules;
     }
     public function save() {
         $data = [
-            "prenom"        => $this->prenom(),
-            "nom"           => $this->nom(),
+            "marque"                    => $this->marque(),
+            "modele"                    => $this->modele(),
+            "couleur"                   => $this->couleur(),
+            "immatriculation"           => $this->immatriculation()
         ];
         if ($this->id_vehicule() > 0) return $this->update();
         $nouvelId = Db::dbCreate(self::TABLE_NAME, $data);
-        $this->setId($nouvelId);
+        $this->setIdVehicule($nouvelId);
         return $this;
     }
     public function update() {
         if ($this->id_vehicule > 0) {
             $data = [
-                "prenom"                    => $this->prenom(),
-                "nom"                       => $this->nom(),
+                "marque"                    => $this->marque(),
+                "modele"                    => $this->modele(),
+                "couleur"                   => $this->couleur(),
+                "immatriculation"           => $this->immatriculation(),
                 "id_vehicule"               => $this->id_vehicule()
             ];
             Db::dbUpdate(self::TABLE_NAME, $data, 'id_vehicule');
@@ -169,7 +186,7 @@ class Vehicule extends Db {
         ];
         
         Db::dbDelete(self::TABLE_NAME, $data);
-        // On supprime aussi tous les emprunts !
+        // On supprime aussi tous les locations !
         Db::dbDelete(Association::TABLE_NAME, [
             'id_association' => $this->id_association()
         ]);

@@ -1,12 +1,16 @@
 <?php
 class ConducteursController {
-    public function indexAdd() {
+    public function index() {
         $conducteurs = Conducteur::findAll();
-        view('conducteurs.indexAdd', compact('conducteurs'));
+        view('conducteurs.index', compact('conducteurs'));
     }
     public function show($id) {
         $conducteur = Conducteur::findOne($id);
         view('conducteurs.show', compact('conducteur'));
+    }
+
+    public function add() {
+        view('conducteurs.add');
     }
 
     public function save() {
@@ -17,7 +21,7 @@ class ConducteursController {
     }
     public function edit($id) {
         $conducteur = Conducteur::findOne($id);
-        view('conducteurs.indexAdd', compact('conducteurs'));
+        view('conducteurs.add', compact('conducteur'));
     }
     public function delete($id) {
         $conducteur = Conducteur::findOne($id);

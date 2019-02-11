@@ -58,6 +58,9 @@ class Conducteur extends Db {
      */ 
     public function setPrenom($prenom)
     {
+        if (strlen($prenom) == 0) {
+            throw new Exception('Le prenom ne doit pas être nul.');
+        }
         $this->prenom = $prenom;
 
         return $this;
@@ -70,6 +73,9 @@ class Conducteur extends Db {
      */ 
     public function setNom($nom)
     {
+        if (strlen($nom) == 0) {
+            throw new Exception('Le nom ne doit pas être nul.');
+        }
         $this->nom = $nom;
 
         return $this;
@@ -105,13 +111,13 @@ class Conducteur extends Db {
         ];
         if ($this->id_conducteur() > 0) return $this->update();
         $nouvelId = Db::dbCreate(self::TABLE_NAME, $data);
-        $this->setId($nouvelId);
+        $this->setIdConducteur($nouvelId);
         return $this;
     }
     public function update() {
         if ($this->id_conducteur > 0) {
             $data = [
-                "prenom"                   => $this->prenom(),
+                "prenom"                    => $this->prenom(),
                 "nom"                       => $this->nom(),
                 "id_conducteur"             => $this->id_conducteur()
             ];

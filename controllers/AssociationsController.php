@@ -1,29 +1,18 @@
 <?php
-class AbonnesController {
+class AssociationsController {
     public function index() {
-        $abonnes = Abonne::findAll();
-        view('abonnes.index', compact('abonnes'));
-    }
-    public function show($id) {
-        $abonne = Abonne::findOne($id);
-        view('abonnes.show', compact('abonne'));
+        $associations = Association::findAll();
+        view('Associations.index', compact('Associations'));
     }
     public function add() {
-        view('abonnes.add');
+        $conducteurs = Conducteur::findAll();
+        $vehicules = Vehicule::findAll();
+        view('Associations.add', compact('conducteurs', 'vehicules'));
     }
     public function save() {
-        $abonne = new Abonne($_POST['nom'], $_POST['prenom'], $_POST['id']);
-        $abonne->save();
-        Header('Location: '. url('abonnes'));
+        $association = new Association($_POST['id_conducteur'], $_POST['id_vehicule'], $_POST['id_association']);
+        $association->save();
+        Header('Location: '. url('associations'));
         exit();
     }
-    public function edit($id) {
-        $abonne = Abonne::findOne($id);
-        view('abonnes.add', compact('abonne'));
-    }
-    public function delete($id) {
-        $abonne = Abonne::findOne($id);
-        $abonne->delete();
-        Header('Location: '. url('abonnes'));
-    }   
 }
